@@ -72,6 +72,7 @@ app.post('/message', (req, res) => {
             res.send(err)
             return
         }
+        console.log('Added farewell: ' + farewell)
         res.send(farewell)
     })
 })
