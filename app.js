@@ -100,8 +100,11 @@ function connect() {
         .on('disconnected', connect)
         .once('open', listen);
 
-    // TODO: Supply actual DB via config fil
-    return mongoose.connect('mongodb://localhost/farewells', {
+    let dbUri = 'mongodb://localhost/farewells'
+    if (process.env.MONGODB_URI) {
+        dbUri = process.env.MONGODB_URI;
+    }
+    return mongoose.connect(dbUri, {
         keepAlive: 1,
         useNewUrlParser: true,
         useUnifiedTopology: true
