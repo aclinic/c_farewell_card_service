@@ -2,9 +2,11 @@
 
 const express = require('express')
 const mongoose = require('mongoose')
+const path = require('path');
 
 const app = express()
 app.use(express.json())
+app.use(express.static(path.join(__dirname, 'build')));
 
 const port = 3000
 
@@ -20,7 +22,12 @@ farewellSchema.methods.updateMessage = function (newFarewellMessage) {
 
 const Farewell = mongoose.model('Farewell', farewellSchema)
 
-app.get('/', (req, res) => {
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+app.get('/messages', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     Farewell.find(function (err, farewell) {
         if (err) {
             console.error(err)
@@ -44,7 +51,8 @@ app.get('/admin', (req, res) => {
     })
 })
 
-app.put('/', (req, res) => {
+app.put('/message', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     Farewell.updateOne({ _id: req.body._id }, { farewellMessage: req.body.farewellMessage }, null, function (err, farewell) {
         if (err) {
             console.error(err)
@@ -55,7 +63,8 @@ app.put('/', (req, res) => {
     })
 })
 
-app.post('/', (req, res) => {
+app.post('/message', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     const newFarewell = new Farewell({ author: req.body.author, farewellMessage: '' })
     newFarewell.save(function (err, farewell) {
         if (err) {
@@ -67,7 +76,8 @@ app.post('/', (req, res) => {
     })
 })
 
-app.delete('/', (req, res) => {
+app.delete('/message', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
     Farewell.deleteOne({ _id: req.body._id }, null, function (err, farewell) {
         if (err) {
             console.error(err)
