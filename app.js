@@ -3,10 +3,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const path = require('path');
+const cors = require('cors');
 
 const app = express()
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'build')));
+app.use(cors({ origin: true, credentials: true }));
 
 const port = process.env.PORT || 3000
 
