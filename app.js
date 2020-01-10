@@ -65,31 +65,31 @@ app.put('/message', (req, res) => {
     })
 })
 
-app.post('/message', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    const newFarewell = new Farewell({ author: req.body.author, farewellMessage: '' })
-    newFarewell.save(function (err, farewell) {
-        if (err) {
-            console.error(err)
-            res.send(err)
-            return
-        }
-        console.log('Added farewell: ' + farewell)
-        res.send(farewell)
-    })
-})
+// app.post('/message', (req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     const newFarewell = new Farewell({ author: req.body.author, farewellMessage: '' })
+//     newFarewell.save(function (err, farewell) {
+//         if (err) {
+//             console.error(err)
+//             res.send(err)
+//             return
+//         }
+//         console.log('Added farewell: ' + farewell)
+//         res.send(farewell)
+//     })
+// })
 
-app.delete('/message', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    Farewell.deleteOne({ _id: req.body._id }, null, function (err, farewell) {
-        if (err) {
-            console.error(err)
-            res.send(err)
-            return
-        }
-        res.send(farewell)
-    })
-})
+// app.delete('/message', (req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     Farewell.deleteOne({ _id: req.body._id }, null, function (err, farewell) {
+//         if (err) {
+//             console.error(err)
+//             res.send(err)
+//             return
+//         }
+//         res.send(farewell)
+//     })
+// })
 
 connect()
 
