@@ -42,28 +42,28 @@ app.get('/messages', (req, res) => {
     })
 })
 
-app.get('/admin', (req, res) => {
-    Farewell.find(function (err, farewell) {
-        if (err) {
-            console.error(err)
-            res.send(err)
-            return
-        }
-        res.send(farewell)
-    })
-})
+// app.get('/admin', (req, res) => {
+//     Farewell.find(function (err, farewell) {
+//         if (err) {
+//             console.error(err)
+//             res.send(err)
+//             return
+//         }
+//         res.send(farewell)
+//     })
+// })
 
-app.put('/message', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    Farewell.updateOne({ _id: req.body._id }, { farewellMessage: req.body.farewellMessage }, null, function (err, farewell) {
-        if (err) {
-            console.error(err)
-            res.send(err)
-            return
-        }
-        res.send(farewell)
-    })
-})
+// app.put('/message', (req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     Farewell.updateOne({ _id: req.body._id }, { farewellMessage: req.body.farewellMessage }, null, function (err, farewell) {
+//         if (err) {
+//             console.error(err)
+//             res.send(err)
+//             return
+//         }
+//         res.send(farewell)
+//     })
+// })
 
 // app.post('/message', (req, res) => {
 //     res.setHeader('Access-Control-Allow-Origin', '*');
